@@ -6,7 +6,7 @@ Project {
 
     /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
-        directory: "content"
+        directory: ""
     }
 
     QmlFiles {
@@ -98,7 +98,7 @@ Project {
     importPaths: [ "imports", "asset_imports" ]
 
     /* Required for deployment */
-    targetDirectory: "/opt/UI_Matching_Network"
+    targetDirectory: "/opt/Matching_Network"
 
     qdsVersion: "4.3"
 

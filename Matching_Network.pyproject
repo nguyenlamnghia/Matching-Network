@@ -1,9 +1,13 @@
 {
     "files": [
+        "about.qml",
+        "calculator.qml",
+        "image/Hust_Logo.png",
         "image/L-Match.jpg",
         "image/Pi-Match.jpg",
         "image/T-Match.jpg",
         "main.py",
-        "main.qml"
+        "main.qml",
+        "result.qml"
     ]
 }
