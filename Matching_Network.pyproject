@@ -1,5 +1,8 @@
 {
     "files": [
+        "image/L-Match.jpg",
+        "image/Pi-Match.jpg",
+        "image/T-Match.jpg",
         "main.py",
         "main.qml"
     ]
