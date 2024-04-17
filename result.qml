@@ -88,7 +88,7 @@ Rectangle {
                 y: 69
                 width: 259
                 height: 181
-                source: "image/" + backend.setData[4] + ".jpg"
+                source: "image/" + backend.setData[6] + ".jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -96,7 +96,7 @@ Rectangle {
                 id: text3
                 x: 118
                 y: 254
-                text: backend.setData[4]
+                text: backend.setData[6]
                 font.pixelSize: 20
                 font.bold: false
                 font.family: "Arial"
@@ -125,7 +125,7 @@ Rectangle {
                 id: text4
                 x: 358
                 y: 97
-                text: qsTr("🔹 ") + backend.setData[5]
+                text: qsTr("🔹 ") + backend.setData[7]
                 font.pixelSize: 20
                 font.bold: true
                 font.family: "Arial"
@@ -135,7 +135,7 @@ Rectangle {
                 id: text5
                 x: 358
                 y: 133
-                text: qsTr("🔹 Source Resistance (Zs): ") + backend.setData[0] + qsTr(" Ω")
+                text: qsTr("🔹 Source Resistance (Zs): ") + (backend.setData[1] == 0 ? backend.setData[0] + qsTr(" Ω") : + backend.setData[0] + qsTr(" + ") + backend.setData[1] + qsTr("j Ω"))
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -144,7 +144,7 @@ Rectangle {
                 id: text6
                 x: 358
                 y: 169
-                text: qsTr("🔹 Load Resistance  (Zl): ") + backend.setData[1] + qsTr(" Ω")
+                text: qsTr("🔹 Load Resistance  (Zl): ") + (backend.setData[3] == 0 ? backend.setData[2] + qsTr(" Ω") : + backend.setData[2] + qsTr(" + ") + backend.setData[3] + qsTr("j Ω"))
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -153,7 +153,7 @@ Rectangle {
                 id: text7
                 x: 358
                 y: 205
-                text: qsTr("🔹 Frequence (f): ") + backend.setData[2] + qsTr(" Hz")
+                text: qsTr("🔹 Frequence (f): ") + backend.setData[4] + qsTr(" ") + backend.setData[8]
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -162,7 +162,8 @@ Rectangle {
                 id: text8
                 x: 358
                 y: 241
-                text: qsTr("🔹 Quality factor (Q): ") + backend.setData[3]
+                text: qsTr("🔹 Quality factor (Q): ") + backend.setData[5]
+                visible: backend.setData[6] != "L Section"
                 font.pixelSize: 20
                 font.family: "Arial"
             }

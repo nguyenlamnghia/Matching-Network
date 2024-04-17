@@ -76,7 +76,7 @@ Rectangle {
                 x: 72
                 y: 152
                 text: qsTr("L Section")
-                checked: backend.setData[4] == "L Section" ? true : false
+                checked: backend.setData[6] == "L Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -89,7 +89,7 @@ Rectangle {
                 x: 404
                 y: 152
                 text: qsTr("T Section")
-                checked: backend.setData[4] == "T Section" ? true : false
+                checked: backend.setData[6] == "T Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -102,7 +102,7 @@ Rectangle {
                 x: 738
                 y: 152
                 text: qsTr("PI Section")
-                checked: backend.setData[4] == "PI Section" ? true : false
+                checked: backend.setData[6] == "PI Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -134,7 +134,7 @@ Rectangle {
             x: 384
             y: 359
             text: qsTr("DC Feed")
-            checked: backend.setData[5] == "DC Feed" ? true : false
+            checked: backend.setData[7] == "DC Feed" ? true : false
             font.family: "Arial"
             font.pointSize: 15
             onClicked: {
@@ -147,7 +147,7 @@ Rectangle {
             x: 644
             y: 360
             text: qsTr("DC Block")
-            checked: backend.setData[5] == "DC Block" ? true : false
+            checked: backend.setData[7] == "DC Block" ? true : false
             font.family: "Arial"
             font.pointSize: 15
             onClicked: {
@@ -173,9 +173,9 @@ Rectangle {
             }
 
             Rectangle {
-                id: rectangle_zin
-                x: 260
-                width: 123
+                id: rectangle_zs_re
+                x: 261
+                width: 70
                 height: 30
                 color: "#ffffff"
                 border.width: 1
@@ -183,7 +183,7 @@ Rectangle {
                 anchors.verticalCenterOffset: 0
 
                 TextInput {
-                    id: textInput_zin
+                    id: textInput_zs_re
                     text: backend.setData[0] == 0 ? "" : backend.setData[0]
                     anchors.fill: parent
                     anchors.leftMargin: 10
@@ -191,14 +191,6 @@ Rectangle {
                     verticalAlignment: Text.AlignVCenter
                     font.family: "Arial"
                 }
-            }
-
-            Text {
-                id: text7
-                x: 394
-                y: 18
-                text: qsTr("Ω")
-                font.pixelSize: 22
             }
 
             Text {
@@ -211,17 +203,17 @@ Rectangle {
             }
 
             Rectangle {
-                id: rectangle_zl
+                id: rectangle_zl_re
                 x: 260
                 y: 69
-                width: 123
+                width: 70
                 height: 30
                 color: "#ffffff"
                 border.width: 1
 
                 TextInput {
-                    id: textInput_zl
-                    text: backend.setData[1] == 0 ? "" : backend.setData[1]
+                    id: textInput_zl_re
+                    text: backend.setData[2] == 0 ? "" : backend.setData[2]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -232,9 +224,9 @@ Rectangle {
 
             Text {
                 id: text9
-                x: 394
+                x: 429
                 y: 70
-                text: qsTr("Ω")
+                text: qsTr("j Ω")
                 font.pixelSize: 22
             }
 
@@ -257,7 +249,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_f
-                    text: backend.setData[2] == 0 ? "" : backend.setData[2]
+                    text: backend.setData[4] == 0 ? "" : backend.setData[4]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -267,25 +259,17 @@ Rectangle {
             }
 
             Text {
-                id: text11
-                x: 827
-                y: 18
-                text: qsTr("Hz")
-                font.pixelSize: 22
-                font.family: "Arial"
-            }
-
-            Text {
-                id: text12
+                id: text_quality_factor
                 x: 495
                 y: 70
                 text: qsTr("Quality factor (Q)")
                 font.pixelSize: 22
                 font.family: "Arial"
+                visible: radioButton_l_section.checked == true ? false : true
             }
 
             Rectangle {
-                id: rectangle_q
+                id: rectangle_quality_factor
                 x: 688
                 y: 68
                 width: 123
@@ -294,7 +278,87 @@ Rectangle {
                 border.width: 1
                 TextInput {
                     id: textInput_q
+                    text: backend.setData[5] == 0 ? "" : backend.setData[5]
+                    anchors.fill: parent
+                    anchors.leftMargin: 10
+                    font.pixelSize: 19
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: "Arial"
+                }
+                visible: radioButton_l_section.checked == true ? false : true
+            }
+
+            ComboBox {
+                id: comboBox_f_unit
+                x: 825
+                y: 16
+                width: 97
+                height: 30
+                font.pointSize: 15
+                model: ["Hz", "KHz", "MHz", "GHz"]
+                currentIndex:
+                {
+                    if (backend.setData[8] == "Hz") return 0
+                    if (backend.setData[8] == "KHz") return 1
+                    if (backend.setData[8] == "MHz") return 2
+                    if (backend.setData[8] == "GHz") return 3
+                }
+            }
+
+            Text {
+                id: text11
+                x: 336
+                y: 70
+                text: qsTr("+")
+                font.pixelSize: 22
+            }
+
+            Rectangle {
+                id: rectangle_zl_im
+                x: 354
+                y: 69
+                width: 70
+                height: 30
+                color: "#ffffff"
+                border.width: 1
+                TextInput {
+                    id: textInput_zl_im
                     text: backend.setData[3] == 0 ? "" : backend.setData[3]
+                    anchors.fill: parent
+                    anchors.leftMargin: 10
+                    font.pixelSize: 19
+                    verticalAlignment: Text.AlignVCenter
+                    font.family: "Arial"
+                }
+            }
+
+            Text {
+                id: text12
+                x: 429
+                y: 18
+                text: qsTr("j Ω")
+                font.pixelSize: 22
+            }
+
+            Text {
+                id: text14
+                x: 336
+                y: 18
+                text: qsTr("+")
+                font.pixelSize: 22
+            }
+
+            Rectangle {
+                id: rectangle_zs_im
+                x: 354
+                y: 17
+                width: 70
+                height: 30
+                color: "#ffffff"
+                border.width: 1
+                TextInput {
+                    id: textInput_zs_im
+                    text: backend.setData[1] == 0 ? "" : backend.setData[1]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -326,7 +390,8 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    backend.getParameter(textInput_zin.text, textInput_zl.text, textInput_f.text, textInput_q.text)
+                    // Neu = "" thi dat la 0
+                    backend.getParameter(textInput_zs_re.text == "" ? 0 : textInput_zs_re.text, textInput_zs_im.text == "" ? 0 : textInput_zs_im.text, textInput_zl_re.text == "" ? 0 : textInput_zl_re.text, textInput_zl_im.text == "" ? 0 : textInput_zl_im.text, textInput_f.text == "" ? 0 : textInput_f.text, textInput_q.text == "" ? 0 : textInput_q.text, comboBox_f_unit.currentText)
                     if (backend.checkFilled)
                     {
                         backend.calculate()
