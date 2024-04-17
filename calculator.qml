@@ -5,14 +5,14 @@ Rectangle {
     width: 1000
     height: 680
     visible: true
-
+    property string calculationResult: "ok"
     Rectangle {
-        id: rectangle
+        id: bg
         color: "#e9ecef"
         anchors.fill: parent
 
         Rectangle {
-            id: rectangle1
+            id: rectangle_header
             y: 16
             width: 936
             height: 84
@@ -24,7 +24,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
 
             Text {
-                id: text1
+                id: header
                 text: qsTr("🖥️ Matching Network Calculator")
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
@@ -35,7 +35,7 @@ Rectangle {
         }
 
         Rectangle {
-            id: rectangle2
+            id: retangle_choose_impedance
             x: 32
             y: 153
             width: 936
@@ -43,65 +43,74 @@ Rectangle {
             color: "#ffffff"
 
             Image {
-                id: image
+                id: image_l_section
                 x: 16
                 y: 8
                 width: 239
                 height: 147
-                source: "image/L-Match.jpg"
+                source: "image/L Section.jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
             Image {
-                id: image1
+                id: image_t_section
                 x: 346
                 y: 8
                 width: 245
                 height: 152
-                source: "image/T-Match.jpg"
+                source: "image/T Section.jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
             Image {
-                id: image2
+                id: image_pi_section
                 x: 683
                 y: 8
                 width: 245
                 height: 147
-                source: "image/Pi-Match.jpg"
+                source: "image/PI Section.jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
             RadioButton {
-                id: radioButton2
+                id: radioButton_l_section
                 x: 72
                 y: 152
                 text: qsTr("L Section")
                 font.family: "Arial"
                 font.pointSize: 15
+                onClicked: {
+                    backend.getTypeOfImpedance(radioButton_l_section.text)
+                }
             }
 
             RadioButton {
-                id: radioButton3
+                id: radioButton_t_section
                 x: 404
                 y: 152
                 text: qsTr("T Section")
                 font.family: "Arial"
                 font.pointSize: 15
+                onClicked: {
+                    backend.getTypeOfImpedance(radioButton_t_section.text)
+                }
             }
 
             RadioButton {
-                id: radioButton4
+                id: radioButton_pi_section
                 x: 738
                 y: 152
                 text: qsTr("PI Section")
                 font.family: "Arial"
                 font.pointSize: 15
+                onClicked: {
+                    backend.getTypeOfImpedance(radioButton_pi_section.text)
+                }
             }
         }
 
         Text {
-            id: text2
+            id: text_choose_impedance
             x: 32
             y: 113
             text: qsTr("I. Choose type of impedance matching network")
@@ -110,7 +119,7 @@ Rectangle {
         }
 
         Text {
-            id: text3
+            id: text_select_circuit
             x: 32
             y: 363
             text: qsTr("II. Select circuit type")
@@ -119,26 +128,32 @@ Rectangle {
         }
 
         RadioButton {
-            id: radioButton
+            id: radioButton_dc_feed
             x: 384
             y: 359
             text: qsTr("DC Feed")
             font.family: "Arial"
             font.pointSize: 15
+            onClicked: {
+                backend.getCircuitType(radioButton_dc_feed.text)
+            }
         }
 
         RadioButton {
-            id: radioButton1
+            id: radioButton_dc_block
             x: 644
             y: 360
             text: qsTr("DC Block")
             font.family: "Arial"
             font.pointSize: 15
+            onClicked: {
+                backend.getCircuitType(radioButton_dc_block.text)
+            }
         }
 
         Rectangle {
-            id: rectangle3
-            x: 32
+            id: rectangle_input_parameter
+            x: 33
             y: 474
             width: 936
             height: 114
@@ -154,7 +169,7 @@ Rectangle {
             }
 
             Rectangle {
-                id: rectangle6
+                id: rectangle_zin
                 x: 250
                 width: 123
                 height: 30
@@ -164,8 +179,7 @@ Rectangle {
                 anchors.verticalCenterOffset: 0
 
                 TextInput {
-                    id: textInput
-                    text: qsTr("0")
+                    id: textInput_zin
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -192,7 +206,7 @@ Rectangle {
             }
 
             Rectangle {
-                id: rectangle7
+                id: rectangle_zl
                 x: 250
                 y: 69
                 width: 123
@@ -201,8 +215,7 @@ Rectangle {
                 border.width: 1
 
                 TextInput {
-                    id: textInput1
-                    text: qsTr("0")
+                    id: textInput_zl
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -228,7 +241,7 @@ Rectangle {
                 font.family: "Arial"
             }
             Rectangle {
-                id: rectangle8
+                id: rectangle_f
                 x: 688
                 y: 16
                 width: 123
@@ -237,8 +250,7 @@ Rectangle {
                 border.width: 1
 
                 TextInput {
-                    id: textInput2
-                    text: qsTr("0")
+                    id: textInput_f
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -260,13 +272,13 @@ Rectangle {
                 id: text12
                 x: 495
                 y: 70
-                text: qsTr("Quality Factor (Q)")
+                text: qsTr("Quality factor (Q)")
                 font.pixelSize: 22
                 font.family: "Arial"
             }
 
             Rectangle {
-                id: rectangle9
+                id: rectangle_q
                 x: 688
                 y: 68
                 width: 123
@@ -274,8 +286,7 @@ Rectangle {
                 color: "#ffffff"
                 border.width: 1
                 TextInput {
-                    id: textInput3
-                    text: qsTr("0")
+                    id: textInput_q
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -286,7 +297,7 @@ Rectangle {
         }
 
         Rectangle {
-            id: rectangle4
+            id: rectangle_calculate
             x: 778
             y: 612
             width: 190
@@ -307,13 +318,15 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
+                    backend.getParameter(textInput_zin.text, textInput_zl.text, textInput_f.text, textInput_q.text)
+                    backend.calculate()
                     loader.source = "result.qml"
                 }
             }
         }
 
         Text {
-            id: text5
+            id: text_input_parameter
             x: 32
             y: 422
             text: qsTr("III. Input Parameter")
@@ -322,7 +335,7 @@ Rectangle {
         }
 
         Rectangle {
-            id: rectangle5
+            id: rectangle_line
             x: 32
             y: 407
             width: 930
@@ -331,7 +344,7 @@ Rectangle {
         }
 
         Rectangle {
-            id: rectangle10
+            id: rectangle_about
             x: 32
             y: 612
             width: 190
@@ -359,6 +372,13 @@ Rectangle {
             }
         }
     }
+    // Connections {
+    //     target: backend
+    //     function onGetData(stringText)
+    //     {
+    //         header.text = stringText
+    //     }
+    // }
 
 
 }

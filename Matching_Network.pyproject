@@ -3,9 +3,9 @@
         "about.qml",
         "calculator.qml",
         "image/Hust_Logo.png",
-        "image/L-Match.jpg",
-        "image/Pi-Match.jpg",
-        "image/T-Match.jpg",
+        "image/L Section.jpg",
+        "image/PI Section.jpg",
+        "image/T Section.jpg",
         "main.py",
         "main.qml",
         "result.qml"

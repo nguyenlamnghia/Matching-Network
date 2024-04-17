@@ -7,6 +7,10 @@ Window {
     width: 1000
     height: 680
     visible: true
+    maximumHeight: 680
+    maximumWidth: 1000
+    minimumHeight: 680
+    minimumWidth: 1000
     title: qsTr("Impedance Matching Network")
 
     Loader {

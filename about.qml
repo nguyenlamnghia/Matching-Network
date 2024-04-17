@@ -8,6 +8,10 @@ ApplicationWindow  {
     height: 300
     title: "About"
     visible: true
+    maximumHeight: 300
+    maximumWidth: 700
+    minimumHeight: 300
+    minimumWidth: 700
 
     Rectangle {
         id: rectangle
