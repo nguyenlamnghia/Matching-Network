@@ -9,7 +9,7 @@ from PySide2.QtCore import QObject, Slot, Signal, Property
 class MainWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
-        self.zin = 0
+        self.zs = 0
         self.zl = 0
         self.f = 0
         self.q = 0
@@ -19,24 +19,24 @@ class MainWindow(QObject):
     @Property(bool)
     def checkFilled(self):
         try:
-            self.zin = int(self.zin)
+            self.zs = int(self.zs)
             self.zl = int(self.zl)
             self.f = int(self.f)
             self.q = int(self.q)
         except Exception as e:
             return False
-        if self.zin and self.zl and self.f and self.q and self.typeOfImpedance and self.circuitType:
+        if self.zs and self.zl and self.f and self.q and self.typeOfImpedance and self.circuitType:
             return True
         return False
 
     @Property(list)
     def setData(self):
-        data = [self.zin, self.zl, self.f, self.q, self.typeOfImpedance, self.circuitType]
+        data = [self.zs, self.zl, self.f, self.q, self.typeOfImpedance, self.circuitType]
         return data
 
     @Slot(str, str, str, str)
-    def getParameter(self, zin, zl, f, q):
-        self.zin = zin
+    def getParameter(self, zs, zl, f, q):
+        self.zs = zs
         self.zl = zl
         self.f = f
         self.q = q
@@ -51,7 +51,7 @@ class MainWindow(QObject):
 
     @Slot()
     def calculate(self):
-        print(self.zin+self.zl)
+        print(self.zs+self.zl)
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)

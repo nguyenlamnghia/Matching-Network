@@ -167,14 +167,14 @@ Rectangle {
                 id: text6
                 x: 21
                 y: 18
-                text: qsTr("Input impedance (Zin)")
+                text: qsTr("Source Resistance (Zs)")
                 font.pixelSize: 22
                 font.family: "Arial"
             }
 
             Rectangle {
                 id: rectangle_zin
-                x: 250
+                x: 260
                 width: 123
                 height: 30
                 color: "#ffffff"
@@ -184,7 +184,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_zin
-                    text: backend.setData[0]
+                    text: backend.setData[0] == 0 ? "" : backend.setData[0]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -195,7 +195,7 @@ Rectangle {
 
             Text {
                 id: text7
-                x: 384
+                x: 394
                 y: 18
                 text: qsTr("Ω")
                 font.pixelSize: 22
@@ -205,14 +205,14 @@ Rectangle {
                 id: text8
                 x: 21
                 y: 70
-                text: qsTr("Load impedance (Zl)")
+                text: qsTr("Load Resistance (Zl)")
                 font.pixelSize: 22
                 font.family: "Arial"
             }
 
             Rectangle {
                 id: rectangle_zl
-                x: 250
+                x: 260
                 y: 69
                 width: 123
                 height: 30
@@ -221,7 +221,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_zl
-                    text: backend.setData[1]
+                    text: backend.setData[1] == 0 ? "" : backend.setData[1]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -232,7 +232,7 @@ Rectangle {
 
             Text {
                 id: text9
-                x: 384
+                x: 394
                 y: 70
                 text: qsTr("Ω")
                 font.pixelSize: 22
@@ -257,7 +257,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_f
-                    text: backend.setData[2]
+                    text: backend.setData[2] == 0 ? "" : backend.setData[2]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -294,7 +294,7 @@ Rectangle {
                 border.width: 1
                 TextInput {
                     id: textInput_q
-                    text: backend.setData[3]
+                    text: backend.setData[3] == 0 ? "" : backend.setData[3]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -389,11 +389,11 @@ Rectangle {
 
         Text {
             id: text_error
-            x: 290
+            x: 262
             y: 623
             visible: false
             color: "#e03131"
-            text: qsTr("Error! An error occurred. Please try again later\n")
+            text: qsTr("Error! An error occurred, please check and try again\n")
             font.pixelSize: 19
             font.bold: true
             font.family: "Arial"

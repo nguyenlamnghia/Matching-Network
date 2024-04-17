@@ -135,7 +135,7 @@ Rectangle {
                 id: text5
                 x: 358
                 y: 133
-                text: qsTr("🔹 Input impedance (Zin): ") + backend.setData[0] + qsTr(" Ω")
+                text: qsTr("🔹 Source Resistance (Zs): ") + backend.setData[0] + qsTr(" Ω")
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -144,7 +144,7 @@ Rectangle {
                 id: text6
                 x: 358
                 y: 169
-                text: qsTr("🔹 Load impedance  (Zl): ") + backend.setData[1] + qsTr(" Ω")
+                text: qsTr("🔹 Load Resistance  (Zl): ") + backend.setData[1] + qsTr(" Ω")
                 font.pixelSize: 20
                 font.family: "Arial"
             }
