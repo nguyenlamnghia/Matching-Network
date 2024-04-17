@@ -5,7 +5,6 @@ Rectangle {
     width: 1000
     height: 680
     visible: true
-    property string calculationResult: "ok"
     Rectangle {
         id: bg
         color: "#e9ecef"
@@ -77,6 +76,7 @@ Rectangle {
                 x: 72
                 y: 152
                 text: qsTr("L Section")
+                checked: backend.setData[4] == "L Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -89,6 +89,7 @@ Rectangle {
                 x: 404
                 y: 152
                 text: qsTr("T Section")
+                checked: backend.setData[4] == "T Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -101,6 +102,7 @@ Rectangle {
                 x: 738
                 y: 152
                 text: qsTr("PI Section")
+                checked: backend.setData[4] == "PI Section" ? true : false
                 font.family: "Arial"
                 font.pointSize: 15
                 onClicked: {
@@ -132,6 +134,7 @@ Rectangle {
             x: 384
             y: 359
             text: qsTr("DC Feed")
+            checked: backend.setData[5] == "DC Feed" ? true : false
             font.family: "Arial"
             font.pointSize: 15
             onClicked: {
@@ -144,6 +147,7 @@ Rectangle {
             x: 644
             y: 360
             text: qsTr("DC Block")
+            checked: backend.setData[5] == "DC Block" ? true : false
             font.family: "Arial"
             font.pointSize: 15
             onClicked: {
@@ -180,6 +184,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_zin
+                    text: backend.setData[0]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -216,6 +221,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_zl
+                    text: backend.setData[1]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -251,6 +257,7 @@ Rectangle {
 
                 TextInput {
                     id: textInput_f
+                    text: backend.setData[2]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -287,6 +294,7 @@ Rectangle {
                 border.width: 1
                 TextInput {
                     id: textInput_q
+                    text: backend.setData[3]
                     anchors.fill: parent
                     anchors.leftMargin: 10
                     font.pixelSize: 19
@@ -319,8 +327,15 @@ Rectangle {
                 anchors.fill: parent
                 onClicked: {
                     backend.getParameter(textInput_zin.text, textInput_zl.text, textInput_f.text, textInput_q.text)
-                    backend.calculate()
-                    loader.source = "result.qml"
+                    if (backend.checkFilled)
+                    {
+                        backend.calculate()
+                        loader.source = "result.qml"
+                    }
+                    else
+                    {
+                        text_error.visible = true
+                    }
                 }
             }
         }
@@ -370,6 +385,18 @@ Rectangle {
                     window.show()
                 }
             }
+        }
+
+        Text {
+            id: text_error
+            x: 290
+            y: 623
+            visible: false
+            color: "#e03131"
+            text: qsTr("Error! An error occurred. Please try again later\n")
+            font.pixelSize: 19
+            font.bold: true
+            font.family: "Arial"
         }
     }
     // Connections {

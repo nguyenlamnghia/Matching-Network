@@ -16,6 +16,19 @@ class MainWindow(QObject):
         self.typeOfImpedance = ""
         self.circuitType = ""
 
+    @Property(bool)
+    def checkFilled(self):
+        try:
+            self.zin = int(self.zin)
+            self.zl = int(self.zl)
+            self.f = int(self.f)
+            self.q = int(self.q)
+        except Exception as e:
+            return False
+        if self.zin and self.zl and self.f and self.q and self.typeOfImpedance and self.circuitType:
+            return True
+        return False
+
     @Property(list)
     def setData(self):
         data = [self.zin, self.zl, self.f, self.q, self.typeOfImpedance, self.circuitType]
@@ -38,7 +51,7 @@ class MainWindow(QObject):
 
     @Slot()
     def calculate(self):
-        print("OK")
+        print(self.zin+self.zl)
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
