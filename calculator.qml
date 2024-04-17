@@ -294,7 +294,7 @@ Rectangle {
                 y: 16
                 width: 97
                 height: 30
-                font.pointSize: 15
+                font.pointSize: 13
                 model: ["Hz", "KHz", "MHz", "GHz"]
                 currentIndex:
                 {

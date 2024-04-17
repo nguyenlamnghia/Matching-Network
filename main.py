@@ -53,7 +53,6 @@ class MainWindow(QObject):
         self.f = f
         self.q = q
         self.f_unit = f_unit
-        print(self.f_unit)
 
 
     @Slot(str)
@@ -66,7 +65,7 @@ class MainWindow(QObject):
 
     @Slot()
     def calculate(self):
-        print(self.zs_re+self.zl_re)
+        pass
 
 if __name__ == "__main__":
     app = QGuiApplication(sys.argv)
