@@ -7,6 +7,7 @@ from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtCore import QObject, Slot, Signal, Property
 
 import l_section
+import pi_section
 
 class MainWindow(QObject):
     def __init__(self):
@@ -65,13 +66,14 @@ class MainWindow(QObject):
     def getTypeOfImpedance(self, name):
         self.typeOfImpedance = name
 
-    # @Slot()
     @Property(list)
     def calculate(self):
         if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Feed") :
             return l_section.dc_feed_handler(self.setData)
         if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Block") :
             return l_section.dc_block_handler(self.setData)
+
+
 
     # def l_section
 

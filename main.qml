@@ -13,6 +13,8 @@ Window {
     minimumWidth: 1000
     title: qsTr("Impedance Matching Network")
     
+    property var calculated_result
+
     Loader {
         id: loader
         anchors.centerIn: parent

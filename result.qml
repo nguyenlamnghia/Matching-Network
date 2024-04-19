@@ -7,7 +7,8 @@ Rectangle {
     visible: true
 
     property var input_data: backend.setData
-    property var calculated_result : backend.calculate
+    // property var calculated_result : backend.calculate
+    property int number_of_solution : 1
 
     Rectangle {
         id: rectangle
@@ -28,7 +29,8 @@ Rectangle {
 
             Text {
                 id: text1
-                text: "Impedance matching results"
+                // text: "Impedance matching results"
+                text: calculated_result[number_of_solution][3]
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
                 font.bold: false
@@ -91,7 +93,7 @@ Rectangle {
                 y: 69
                 width: 259
                 height: 181
-                source: "image/" + calculated_result[3] + ".jpg"
+                source: "image/" + calculated_result[number_of_solution][3] + ".jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -216,7 +218,7 @@ Rectangle {
                 id: text_q_result
                 x: 190
                 y: 75
-                text: parseFloat(calculated_result[0]).toFixed(4)
+                text: parseFloat(calculated_result[number_of_solution][0]).toFixed(4)
                 font.pixelSize: 20
                 font.family: "Arial"
                 font.bold: false
@@ -236,7 +238,7 @@ Rectangle {
                 id: text_l_result
                 x: 190
                 y: 121
-                text: parseFloat(calculated_result[1]).toFixed(4) + qsTr(" nH")
+                text: parseFloat(calculated_result[number_of_solution][1]).toFixed(4) + qsTr(" nH")
                 font.pixelSize: 20
                 font.family: "Arial"
                 font.bold: false
@@ -256,10 +258,66 @@ Rectangle {
                 id: text_c_result
                 x: 690
                 y: 121
-                text: parseFloat(calculated_result[2]).toFixed(4) + qsTr(" pF")
+                text: parseFloat(calculated_result[number_of_solution][2]).toFixed(4) + qsTr(" pF")
                 font.pixelSize: 20
                 font.family: "Arial"
                 font.bold: false
+            }
+        }
+
+        Rectangle {
+            id: rectangle11
+            x: 778
+            y: 612
+            visible: input_data[6] != "L Section" ? true : false
+            width: 190
+            height: 44
+            color: "#ffffff"
+            radius: 8
+            Text {
+                id: text14
+                text: qsTr("Next solution ⏩")
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 22
+                font.italic: false
+                font.family: "Arial"
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    loader.source = "calculator.qml"
+                }
+            }
+        }
+
+        Rectangle {
+            id: rectangle12
+            x: 560
+            y: 612
+            width: 190
+            visible: input_data[6] != "L Section" ? true : false
+            height: 44
+            color: "#ffffff"
+            radius: 8
+            Text {
+                id: text15
+                text: qsTr("⏪ Pre solution")
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 22
+                font.italic: false
+                font.family: "Arial"
+                font.bold: true
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                                    loader.source = "calculator.qml"
+                                }
             }
         }
     }

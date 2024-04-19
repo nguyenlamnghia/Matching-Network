@@ -36,17 +36,15 @@ def LCHP(data):
     qs = xs/rs
     l1 = ((1 + qs ** 2) * xs)/(w * qs ** 2) if qs != 0 else float('inf')
 
-    print(c1,l1)
     rp = (1 + qs ** 2) * rs
     rs = rl
 
     # kiem tra rs < rp thi chay khong thi tra ve non
-    if (rs > rp):
+    if (rs >= rp):
         return float('nan'), float('nan'), float('nan')
     else:
         # Tinh Q
         Q = sqrt(rp / rs - 1)
-
         # Tinh lp
         lp = rp/(w*Q)
 
@@ -181,12 +179,11 @@ def CLHP(data):
     rs = rl
 
     # kiem tra rs < rp thi chay khong thi tra ve non
-    if (rs > rp):
+    if (rs >= rp):
         return float('nan'), float('nan'), float('nan')
     else:
         # Tinh Q
         Q = sqrt(rp / rs - 1)
-
         # Tinh lp
         lp = rp/(w*Q)
 
@@ -234,18 +231,20 @@ def dc_feed_handler(data):
             result = LCLP(data)
             return result
     else:
-        return [1,0,0,"L Section"]
+        return [[data[1]/data[0],0,0,"CLLP"],[data[1]/data[0],0,0,"LCLP"]]
 
 def dc_block_handler(data):
+    arr_result = []
     if check_input(data):
         result = CLHP(data)
-        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2])):
-            return result
-        else:
-            result = LCHP(data)
-            return result
+        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
+            arr_result.append(result)
+        result = LCHP(data)
+        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
+            arr_result.append(result)
+        return arr_result
     else:
-        return [1,0,0,"L Section"]
+        return [[data[1]/data[0],0,0,"CLHP"],[data[1]/data[0],0,0,"LCHP"]]
 
 
 #DC BLOCK = HIGHPASS

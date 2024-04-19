@@ -395,6 +395,7 @@ Rectangle {
                     if (backend.checkFilled)
                     {
                         // backend.calculate()
+                        calculated_result = backend.calculate
                         loader.source = "result.qml"
                     }
                     else
