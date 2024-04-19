@@ -6,8 +6,13 @@
         "image/L Section.jpg",
         "image/PI Section.jpg",
         "image/T Section.jpg",
+        "image/LCHP.jpg",
+        "l_section.py",
         "main.py",
         "main.qml",
-        "result.qml"
+        "result.qml",
+        "image/CLLP.jpg",
+        "image/LCLP.jpg",
+        "image/CLHP.jpg"
     ]
 }

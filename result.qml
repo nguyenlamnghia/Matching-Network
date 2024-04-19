@@ -6,6 +6,9 @@ Rectangle {
     height: 680
     visible: true
 
+    property var input_data: backend.setData
+    property var calculated_result : backend.calculate
+
     Rectangle {
         id: rectangle
         color: "#e9ecef"
@@ -88,7 +91,7 @@ Rectangle {
                 y: 69
                 width: 259
                 height: 181
-                source: "image/" + backend.setData[6] + ".jpg"
+                source: "image/" + calculated_result[3] + ".jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -96,7 +99,7 @@ Rectangle {
                 id: text3
                 x: 118
                 y: 254
-                text: backend.setData[6]
+                text: input_data[6]
                 font.pixelSize: 20
                 font.bold: false
                 font.family: "Arial"
@@ -125,7 +128,7 @@ Rectangle {
                 id: text4
                 x: 358
                 y: 97
-                text: qsTr("🔹 ") + backend.setData[7]
+                text: qsTr("🔹 ") + input_data[7]
                 font.pixelSize: 20
                 font.bold: true
                 font.family: "Arial"
@@ -135,7 +138,7 @@ Rectangle {
                 id: text5
                 x: 358
                 y: 133
-                text: qsTr("🔹 Source Resistance (Zs): ") + (backend.setData[1] == 0 ? backend.setData[0] + qsTr(" Ω") : + backend.setData[0] + qsTr(" + ") + backend.setData[1] + qsTr("j Ω"))
+                text: qsTr("🔹 Source Resistance (Zs): ") + (input_data[1] == 0 ? input_data[0] + qsTr(" Ω") : + input_data[0] + qsTr(" + ") + input_data[1] + qsTr("j Ω"))
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -144,7 +147,7 @@ Rectangle {
                 id: text6
                 x: 358
                 y: 169
-                text: qsTr("🔹 Load Resistance  (Zl): ") + (backend.setData[3] == 0 ? backend.setData[2] + qsTr(" Ω") : + backend.setData[2] + qsTr(" + ") + backend.setData[3] + qsTr("j Ω"))
+                text: qsTr("🔹 Load Resistance  (Zl): ") + (input_data[3] == 0 ? input_data[2] + qsTr(" Ω") : + input_data[2] + qsTr(" + ") + input_data[3] + qsTr("j Ω"))
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -153,7 +156,7 @@ Rectangle {
                 id: text7
                 x: 358
                 y: 205
-                text: qsTr("🔹 Frequence (f): ") + backend.setData[4] + qsTr(" ") + backend.setData[8]
+                text: qsTr("🔹 Frequence (f): ") + input_data[4] + qsTr(" ") + input_data[8]
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -162,8 +165,8 @@ Rectangle {
                 id: text8
                 x: 358
                 y: 241
-                text: qsTr("🔹 Quality factor (Q): ") + backend.setData[5]
-                visible: backend.setData[6] != "L Section"
+                text: qsTr("🔹 Quality factor (Q): ") + input_data[5]
+                visible: input_data[6] != "L Section"
                 font.pixelSize: 20
                 font.family: "Arial"
             }
@@ -197,6 +200,66 @@ Rectangle {
                 width: 936
                 height: 1
                 color: "#000000"
+            }
+
+            Text {
+                id: text10
+                x: 66
+                y: 75
+                text: qsTr("🔹 Q value:")
+                font.pixelSize: 20
+                font.bold: true
+                font.family: "Arial"
+            }
+
+            Text {
+                id: text_q_result
+                x: 190
+                y: 75
+                text: parseFloat(calculated_result[0]).toFixed(4)
+                font.pixelSize: 20
+                font.family: "Arial"
+                font.bold: false
+            }
+
+            Text {
+                id: text11
+                x: 66
+                y: 121
+                text: qsTr("🔹 L value:")
+                font.pixelSize: 20
+                font.family: "Arial"
+                font.bold: true
+            }
+
+            Text {
+                id: text_l_result
+                x: 190
+                y: 121
+                text: parseFloat(calculated_result[1]).toFixed(4) + qsTr(" nH")
+                font.pixelSize: 20
+                font.family: "Arial"
+                font.bold: false
+            }
+
+            Text {
+                id: text12
+                x: 566
+                y: 121
+                text: qsTr("🔹 C value:")
+                font.pixelSize: 20
+                font.family: "Arial"
+                font.bold: true
+            }
+
+            Text {
+                id: text_c_result
+                x: 690
+                y: 121
+                text: parseFloat(calculated_result[2]).toFixed(4) + qsTr(" pF")
+                font.pixelSize: 20
+                font.family: "Arial"
+                font.bold: false
             }
         }
     }
