@@ -5,17 +5,7 @@
 from math import pi, sqrt, isnan
 # import numpy as np
 from numpy import divide
-
-def convert_f_unit(f, unit):
-    match unit:
-        case "Hz":
-            return f
-        case "KHz":
-            return f * 1e3
-        case "MHz":
-            return f * 1e6
-        case "GHz":
-            return f * 1e9
+from middleware import convert_f_unit, l_section_convert_to_ui
 
 # LC HIGHPASS OR LC DC BLOCK
 def LCHP(data):
@@ -231,9 +221,9 @@ def dc_feed_handler(data):
         result = LCLP(data)
         if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
             arr_result.append(result)
-        return arr_result
+        return l_section_convert_to_ui(arr_result)
     else:
-        return [[data[1]/data[0],0,0,"CLLP"],[data[1]/data[0],0,0,"LCLP"]]
+        return l_section_convert_to_ui([[data[1]/data[0],0,0,"CLLP"],[data[1]/data[0],0,0,"LCLP"]])
 
 def dc_block_handler(data):
     arr_result = []
@@ -244,9 +234,9 @@ def dc_block_handler(data):
         result = LCHP(data)
         if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
             arr_result.append(result)
-        return arr_result
+        return l_section_convert_to_ui(arr_result)
     else:
-        return [[data[1]/data[0],0,0,"CLHP"],[data[1]/data[0],0,0,"LCHP"]]
+        return l_section_convert_to_ui([[data[1]/data[0],0,0,"CLHP"],[data[1]/data[0],0,0,"LCHP"]])
 
 
 #DC BLOCK = HIGHPASS

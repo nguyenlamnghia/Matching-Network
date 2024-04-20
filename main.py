@@ -83,7 +83,12 @@ class MainWindow(QObject):
             self.result.emit(result)
         if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Block") :
             result = l_section.dc_block_handler(self.setData)
-            print(result)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "PI Section" and self.circuitType == "DC Block") :
+            result = pi_section.dc_block_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "PI Section" and self.circuitType == "DC Feed") :
+            result = pi_section.dc_feed_handler(self.setData)
             self.result.emit(result)
 
 

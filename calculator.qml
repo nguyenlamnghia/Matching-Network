@@ -468,6 +468,7 @@ Rectangle {
         function onResult(result)
         {
             calculated_result = result
+            console.log(result)
             loader.source = "result.qml"
         }
     }

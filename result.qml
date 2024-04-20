@@ -29,7 +29,7 @@ Rectangle {
             Text {
                 id: text1
                 // text: "Impedance matching results"
-                text: qsTr("Solution (") + (number_of_solution + 1) + qsTr("/") + calculated_result.length + qsTr(")")
+                text: calculated_result.length != 0 ? (qsTr("Solution (") + (number_of_solution + 1) + qsTr("/") + calculated_result.length + qsTr(")")) : "No Solution"
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
                 font.bold: false
@@ -92,7 +92,7 @@ Rectangle {
                 y: 69
                 width: 259
                 height: 181
-                source: "image/" + calculated_result[number_of_solution][3] + ".jpg"
+                source: "image/" + (calculated_result.length != 0 ? calculated_result[number_of_solution][3] : input_data[6]) + ".jpg"
                 fillMode: Image.PreserveAspectFit
             }
 
@@ -207,60 +207,27 @@ Rectangle {
                 id: text10
                 x: 66
                 y: 75
-                text: qsTr("🔹 Q value:")
-                font.pixelSize: 20
-                font.bold: true
-                font.family: "Arial"
-            }
-
-            Text {
-                id: text_q_result
-                x: 190
-                y: 75
-                text: parseFloat(calculated_result[number_of_solution][0]).toFixed(4)
+                text: calculated_result[number_of_solution][0]
                 font.pixelSize: 20
                 font.family: "Arial"
-                font.bold: false
             }
 
             Text {
                 id: text11
                 x: 66
                 y: 121
-                text: qsTr("🔹 L value:")
+                text: calculated_result[number_of_solution][1]
                 font.pixelSize: 20
                 font.family: "Arial"
-                font.bold: true
-            }
-
-            Text {
-                id: text_l_result
-                x: 190
-                y: 121
-                text: parseFloat(calculated_result[number_of_solution][1]).toFixed(4) + qsTr(" nH")
-                font.pixelSize: 20
-                font.family: "Arial"
-                font.bold: false
-            }
-
-            Text {
-                id: text12
-                x: 566
-                y: 121
-                text: qsTr("🔹 C value:")
-                font.pixelSize: 20
-                font.family: "Arial"
-                font.bold: true
             }
 
             Text {
                 id: text_c_result
-                x: 690
+                x: 566
                 y: 121
-                text: parseFloat(calculated_result[number_of_solution][2]).toFixed(4) + qsTr(" pF")
+                text: calculated_result[number_of_solution][2]
                 font.pixelSize: 20
                 font.family: "Arial"
-                font.bold: false
             }
         }
 

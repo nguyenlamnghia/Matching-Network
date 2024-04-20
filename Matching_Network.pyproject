@@ -14,6 +14,10 @@
         "image/CLLP.jpg",
         "image/LCLP.jpg",
         "image/CLHP.jpg",
-        "pi_section.py"
+        "pi_section.py",
+        "middleware.py",
+        "image/LCL_PI_Section.jpg",
+        "image/CLC_PI_Section.jpg",
+        "t_section.py"
     ]
 }
