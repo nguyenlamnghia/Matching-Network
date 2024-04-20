@@ -7,6 +7,8 @@ from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtCore import QObject, Slot, Signal, Property
 
 import l_section
+import pi_section
+import t_section
 
 class MainWindow(QObject):
     def __init__(self):
@@ -65,13 +67,38 @@ class MainWindow(QObject):
     def getTypeOfImpedance(self, name):
         self.typeOfImpedance = name
 
-    # @Slot()
-    @Property(list)
+    # @Property("QVariantList")
+    # def calculate(self):
+    #     if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Feed") :
+    #         return l_section.dc_feed_handler(self.setData)
+    #     if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Block") :
+    #         print(l_section.dc_block_handler(self.setData))
+    #         return l_section.dc_block_handler(self.setData)
+
+
+    result = Signal(list)
+    @Slot()
     def calculate(self):
         if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Feed") :
-            return l_section.dc_feed_handler(self.setData)
+            result = l_section.dc_feed_handler(self.setData)
+            self.result.emit(result)
         if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Block") :
-            return l_section.dc_block_handler(self.setData)
+            result = l_section.dc_block_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "PI Section" and self.circuitType == "DC Block") :
+            result = pi_section.dc_block_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "PI Section" and self.circuitType == "DC Feed") :
+            result = pi_section.dc_feed_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "T Section" and self.circuitType == "DC Feed") :
+            result = t_section.dc_feed_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "T Section" and self.circuitType == "DC Block") :
+            result = t_section.dc_block_handler(self.setData)
+            self.result.emit(result)
+
+
 
     # def l_section
 

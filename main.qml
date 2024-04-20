@@ -12,7 +12,10 @@ Window {
     minimumHeight: 680
     minimumWidth: 1000
     title: qsTr("Impedance Matching Network")
-    
+
+    // Khai bao ket qua
+    property var calculated_result
+
     Loader {
         id: loader
         anchors.centerIn: parent

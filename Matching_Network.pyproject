@@ -13,6 +13,13 @@
         "result.qml",
         "image/CLLP.jpg",
         "image/LCLP.jpg",
-        "image/CLHP.jpg"
+        "image/CLHP.jpg",
+        "pi_section.py",
+        "middleware.py",
+        "image/LCL_PI_Section.jpg",
+        "image/CLC_PI_Section.jpg",
+        "t_section.py",
+        "image/CLC_T_Section.jpg",
+        "image/LCL_T_Section.jpg"
     ]
 }
