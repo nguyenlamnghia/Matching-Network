@@ -40,7 +40,7 @@ def CLC(rs, xs, rl, xl, Q, f):
     l = l * 1e9
     #return l
 
-    return [cs, cl, l , "CLC_PI_Section"]
+    return [cs, l, cl , "CLC_PI_Section"]
 
 def LCL(rs, xs, rl, xl, Q, f):
     rv = max(rs, rl) / (Q ** 2 + 1)
@@ -74,7 +74,7 @@ def LCL(rs, xs, rl, xl, Q, f):
     c = c * 1e12
     # return c
 
-    return [ls, ll, c, "LCL_PI_Section"]
+    return [ls, c, ll, "LCL_PI_Section"]
 
 
 def dc_block_handler(data):

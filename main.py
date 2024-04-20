@@ -8,6 +8,7 @@ from PySide2.QtCore import QObject, Slot, Signal, Property
 
 import l_section
 import pi_section
+import t_section
 
 class MainWindow(QObject):
     def __init__(self):
@@ -89,6 +90,12 @@ class MainWindow(QObject):
             self.result.emit(result)
         if (self.typeOfImpedance == "PI Section" and self.circuitType == "DC Feed") :
             result = pi_section.dc_feed_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "T Section" and self.circuitType == "DC Feed") :
+            result = t_section.dc_feed_handler(self.setData)
+            self.result.emit(result)
+        if (self.typeOfImpedance == "T Section" and self.circuitType == "DC Block") :
+            result = t_section.dc_block_handler(self.setData)
             self.result.emit(result)
 
 

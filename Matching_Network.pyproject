@@ -18,6 +18,8 @@
         "middleware.py",
         "image/LCL_PI_Section.jpg",
         "image/CLC_PI_Section.jpg",
-        "t_section.py"
+        "t_section.py",
+        "image/CLC_T_Section.jpg",
+        "image/LCL_T_Section.jpg"
     ]
 }
