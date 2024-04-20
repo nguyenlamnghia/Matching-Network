@@ -41,7 +41,7 @@ def LCHP(data):
 
     # kiem tra rs < rp thi chay khong thi tra ve non
     if (rs >= rp):
-        return float('nan'), float('nan'), float('nan')
+        return [float('nan'), float('nan'), float('nan')]
     else:
         # Tinh Q
         Q = sqrt(rp / rs - 1)
@@ -74,7 +74,7 @@ def LCHP(data):
         lchpcval = c
         lchpqval = abs(Q)
         lchplval = l
-        return (lchpqval, lchpcval, lchplval, "LCHP")
+        return [lchpqval, lchpcval, lchplval, "LCHP"]
 
 # CL LOWPASS OR CL DC FEED
 def CLLP(data):
@@ -100,7 +100,7 @@ def CLLP(data):
 
     # Kiem tra neu rs < rl thi chay
     if (rs > rp):
-        return float('nan'), float('nan'), float('nan')
+        return [float('nan'), float('nan'), float('nan')]
     else:
         Q = sqrt(rp / rl - 1);
 
@@ -114,7 +114,7 @@ def CLLP(data):
         # do l1 nt l
         l = (ls - l1) * 1e9
 
-        return (Q, l, c, "CLLP")
+        return [Q, l, c, "CLLP"]
 
 # LC LOWPASS OR LC DC FEED
 # Giong CLLP nhung load va source duoc hoan doi
@@ -140,7 +140,7 @@ def LCLP(data):
 
     # Kiem tra neu rs < rl thi chay
     if (rs > rp):
-        return float('nan'), float('nan'), float('nan')
+        return [float('nan'), float('nan'), float('nan')]
     else:
         Q = sqrt(rp / rl - 1);
 
@@ -153,7 +153,7 @@ def LCLP(data):
         ls = (Q * rl) / w
         # do l1 nt l
         l = (ls - l1) * 1e9
-        return (Q, l, c, "LCLP")
+        return [Q, l, c, "LCLP"]
 
 # CL HIGHPASS OR CL DC BLOCK
 def CLHP(data):
@@ -180,7 +180,7 @@ def CLHP(data):
 
     # kiem tra rs < rp thi chay khong thi tra ve non
     if (rs >= rp):
-        return float('nan'), float('nan'), float('nan')
+        return [float('nan'), float('nan'), float('nan')]
     else:
         # Tinh Q
         Q = sqrt(rp / rs - 1)
@@ -213,7 +213,7 @@ def CLHP(data):
         clhpcval = c
         clhpqval = abs(Q)
         clhplval = l
-        return(clhpqval,clhplval,clhpcval,"CLHP")
+        return [clhpqval,clhplval,clhpcval,"CLHP"]
 
 def check_input(data):
     # neu rs = rl && xs = xl
@@ -223,13 +223,15 @@ def check_input(data):
         return True
 
 def dc_feed_handler(data):
+    arr_result = []
     if check_input(data):
         result = CLLP(data)
-        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2])):
-            return result
-        else:
-            result = LCLP(data)
-            return result
+        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
+            arr_result.append(result)
+        result = LCLP(data)
+        if not (isnan(result[0]) or isnan(result[1]) or isnan(result[2]) or result[1] < 0 or result [2] < 0):
+            arr_result.append(result)
+        return arr_result
     else:
         return [[data[1]/data[0],0,0,"CLLP"],[data[1]/data[0],0,0,"LCLP"]]
 

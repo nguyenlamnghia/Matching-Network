@@ -5,10 +5,9 @@ Rectangle {
     width: 1000
     height: 680
     visible: true
-
     property var input_data: backend.setData
     // property var calculated_result : backend.calculate
-    property int number_of_solution : 1
+    property int number_of_solution : 0
 
     Rectangle {
         id: rectangle
@@ -30,7 +29,7 @@ Rectangle {
             Text {
                 id: text1
                 // text: "Impedance matching results"
-                text: calculated_result[number_of_solution][3]
+                text: qsTr("Solution (") + (number_of_solution + 1) + qsTr("/") + calculated_result.length + qsTr(")")
                 anchors.verticalCenter: parent.verticalCenter
                 font.pixelSize: 40
                 font.bold: false
@@ -269,7 +268,7 @@ Rectangle {
             id: rectangle11
             x: 778
             y: 612
-            visible: input_data[6] != "L Section" ? true : false
+            visible: calculated_result.length > 1 ? true : false
             width: 190
             height: 44
             color: "#ffffff"
@@ -288,7 +287,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    loader.source = "calculator.qml"
+                    (number_of_solution + 1) != calculated_result.length ? number_of_solution += 1 : number_of_solution = 0
                 }
             }
         }
@@ -298,7 +297,7 @@ Rectangle {
             x: 560
             y: 612
             width: 190
-            visible: input_data[6] != "L Section" ? true : false
+            visible: calculated_result.length > 1 ? true : false
             height: 44
             color: "#ffffff"
             radius: 8
@@ -316,8 +315,8 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                                    loader.source = "calculator.qml"
-                                }
+                    number_of_solution != 0 ? number_of_solution -= 1 : number_of_solution = calculated_result.length - 1
+                }
             }
         }
     }

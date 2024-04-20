@@ -394,9 +394,7 @@ Rectangle {
                     backend.getParameter(textInput_zs_re.text == "" ? 0 : textInput_zs_re.text, textInput_zs_im.text == "" ? 0 : textInput_zs_im.text, textInput_zl_re.text == "" ? 0 : textInput_zl_re.text, textInput_zl_im.text == "" ? 0 : textInput_zl_im.text, textInput_f.text == "" ? 0 : textInput_f.text, textInput_q.text == "" ? 0 : textInput_q.text, comboBox_f_unit.currentText)
                     if (backend.checkFilled)
                     {
-                        // backend.calculate()
-                        calculated_result = backend.calculate
-                        loader.source = "result.qml"
+                        backend.calculate()
                     }
                     else
                     {
@@ -465,13 +463,14 @@ Rectangle {
             font.family: "Arial"
         }
     }
-    // Connections {
-    //     target: backend
-    //     function onGetData(stringText)
-    //     {
-    //         header.text = stringText
-    //     }
-    // }
+    Connections {
+        target: backend
+        function onResult(result)
+        {
+            calculated_result = result
+            loader.source = "result.qml"
+        }
+    }
 
 
 }
