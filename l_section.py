@@ -19,7 +19,7 @@ def LCHP(data):
     w = 2 * pi * f
 
     # chuyen zl sang rs noi tiep vs c1
-    ql = -xl/rl
+    ql = -xl/rl # ql khong dung
     c1 = -1/(w*xl) if xl != 0 else float('inf')
 
     # chuyen zs sang rp song song voi l1
@@ -35,10 +35,11 @@ def LCHP(data):
     else:
         # Tinh Q
         Q = sqrt(rp / rs - 1)
+
         # Tinh lp
         lp = rp/(w*Q)
 
-        # tinh lc
+        # tinh cs
         cs = 1/(Q*w*rs)
 
         # kiem tra neu xl = 0 thi tra ve c luon
@@ -78,8 +79,8 @@ def CLLP(data):
     w = 2 * pi * f
 
     # chuyen zl sang rs noi tiep vs l1
-    ql = xl / rl
-    l1 = xl / w;
+    ql = xl / rl # ql khong dung
+    l1 = xl / w
 
     # chuyen zs sang rp song song voi c1
     qs = -xs / rs
@@ -92,15 +93,15 @@ def CLLP(data):
     if (rs > rp):
         return [float('nan'), float('nan'), float('nan')]
     else:
-        Q = sqrt(rp / rl - 1);
+        Q = sqrt(rp / rs - 1)
 
         # tinh cp
         cp = Q/(rp*w)
         # do c // c1
-        c = (cp - c1) * 1e12;
+        c = (cp - c1) * 1e12
 
         # tinh ls
-        ls = (Q * rl) / w
+        ls = (Q * rs) / w
         # do l1 nt l
         l = (ls - l1) * 1e9
 
@@ -119,7 +120,7 @@ def LCLP(data):
 
     # chuyen zl sang rs noi tiep vs l1
     ql = xl / rl
-    l1 = xl / w;
+    l1 = xl / w
 
     # chuyen zs sang rp song song voi c1
     qs = -xs / rs
@@ -132,15 +133,15 @@ def LCLP(data):
     if (rs > rp):
         return [float('nan'), float('nan'), float('nan')]
     else:
-        Q = sqrt(rp / rl - 1);
+        Q = sqrt(rp / rs - 1)
 
         # tinh cp
         cp = Q/(rp*w)
         # do c // c1
-        c = (cp - c1) * 1e12;
+        c = (cp - c1) * 1e12
 
         # tinh ls
-        ls = (Q * rl) / w
+        ls = (Q * rs) / w
         # do l1 nt l
         l = (ls - l1) * 1e9
         return [Q, l, c, "LCLP"]
