@@ -6,7 +6,6 @@ Rectangle {
     height: 680
     visible: true
     property var input_data: backend.setData
-    // property var calculated_result : backend.calculate
     property int number_of_solution : 0
 
     Rectangle {
