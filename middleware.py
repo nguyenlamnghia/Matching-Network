@@ -15,15 +15,14 @@ def add_1_2_in_pi_l_section(name):
 
 # Chuyen GHz, MHz, Khz -> Hz
 def convert_f_unit(f, unit):
-    match unit:
-        case "Hz":
-            return f
-        case "KHz":
-            return f * 1e3
-        case "MHz":
-            return f * 1e6
-        case "GHz":
-            return f * 1e9
+    if unit == "Hz":
+        return f
+    elif unit == "KHz":
+        return f * 1e3
+    elif unit == "MHz":
+        return f * 1e6
+    elif unit == "GHz":
+        return f * 1e9
 
 # Chuyen du lieu sang dang hien thi (mach l)
 def l_section_convert_to_ui(data):

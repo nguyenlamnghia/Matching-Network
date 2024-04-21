@@ -13,8 +13,8 @@ def CLC(rs, xs, rl, xl, Q, f):
 
     # chuyen zl sang rl noi tiep voi cpl
     # chuyen zs sang rs noi tiep voi cps
-    cpl = -1 / w / xl
-    cps = -1 / w / xs
+    cpl = -1 / w / xl if xl != 0 else float('inf')
+    cps = -1 / w / xs if xs != 0 else float('inf')
 
     # tinh c1, l1 tu q1
     q = sqrt(rv / rs - 1) #start source matching
@@ -78,14 +78,14 @@ def LCL(rs, xs, rl, xl, Q, f):
 
 def LCLC(rs, xs, rl, xl, Q, f):
     # tim r virtual
-    rv = min(rs, rl) / (Q * Q + 1)
+    rv = min(rs, rl) * (Q * Q + 1)
     w = 2 * pi * f
 
     # chuyen zl sang rl noi tiep voi cpl
     # chuyen zs sang rs noi tiep voi lps
     ql = xl / rl
     qs = xs / rs
-    cpl = -1 / w / xl
+    cpl = -1 / w / xl if xl != 0 else float('inf')
     lps = xs / w
 
     # tinh c1, l1 tu q1
@@ -116,13 +116,13 @@ def LCLC(rs, xs, rl, xl, Q, f):
         l = l * 1e9
         return [l1,l,c2,"LLC_T_Section"]
     elif (z_temp < 0):
-        c = 1 / w / z_temp
+        c = - 1 / w / z_temp
         c = c * 1e12
         return [l1,c,c2,"LCC_T_Section"]
 
 def CLCL(rs, xs, rl, xl, Q, f):
     # tim r virtual
-    rv = max(rs, rl) / (Q * Q + 1)
+    rv = min(rs, rl) * (Q * Q + 1)
     w = 2 * pi * f
 
     # chuyen zl sang rl noi tiep voi lpl
@@ -130,7 +130,7 @@ def CLCL(rs, xs, rl, xl, Q, f):
     ql = xl / rl
     qs = xs / rs
     lpl = xl / w
-    cps = -1 / w / xs
+    cps = -1 / w / xs if xs != 0 else float('inf')
 
     # tinh c1, l1 tu q1
     q = sqrt(rv / rs - 1) #start source matching
@@ -159,7 +159,7 @@ def CLCL(rs, xs, rl, xl, Q, f):
         l = l * 1e9
         return [c1,l,l2,"CLL_T_Section"]
     elif (z_temp < 0):
-        c = 1 / w / z_temp
+        c = - 1 / w / z_temp
         c = c * 1e12
         return [c1,c,l2,"CCL_T_Section"]
 
@@ -177,7 +177,7 @@ def dc_block_handler(data):
     if (Q < 0):
         return []
     elif (Q == 0 and rs == rl):
-        return [[0,0,0,"LCL"], [0,0,0,"LCC"], [0,0,0,"CCL"]]
+        return [[0,0,0,"LCL_T_Section"], [0,0,0,"LCC_T_Section"], [0,0,0,"CCL_T_Section"]]
     elif (Q < sqrt(max(rs, rl) / min(rs, rl) - 1)):
         return []
     else:
@@ -198,7 +198,7 @@ def dc_feed_handler(data):
     if (Q < 0):
         return []
     elif (Q == 0 and rs == rl):
-        return [[0,0,0,"LCL"], [0,0,0,"LCC"], [0,0,0,"CCL"]]
+        return [[0,0,0,"LCL_T_Section"], [0,0,0,"LCC_T_Section"], [0,0,0,"CCL_T_Section"]]
     elif (Q < sqrt(max(rs, rl) / min(rs, rl) - 1)):
         return []
     else:
