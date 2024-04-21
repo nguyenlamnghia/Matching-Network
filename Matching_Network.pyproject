@@ -20,6 +20,10 @@
         "image/CLC_PI_Section.jpg",
         "t_section.py",
         "image/CLC_T_Section.jpg",
-        "image/LCL_T_Section.jpg"
+        "image/LCL_T_Section.jpg",
+        "image/CCL_PI_Section.jpg",
+        "image/CLL_PI_Section.jpg",
+        "image/LCC_PI_Section.jpg",
+        "image/LLC_PI_Section.jpg"
     ]
 }
