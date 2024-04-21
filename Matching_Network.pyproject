@@ -24,6 +24,10 @@
         "image/CCL_PI_Section.jpg",
         "image/CLL_PI_Section.jpg",
         "image/LCC_PI_Section.jpg",
-        "image/LLC_PI_Section.jpg"
+        "image/LLC_PI_Section.jpg",
+        "image/LLC_T_Section.jpg",
+        "image/LCC_T_Section.jpg",
+        "image/CLL_T_Section.jpg",
+        "image/CCL_T_Section.jpg"
     ]
 }
