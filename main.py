@@ -11,6 +11,7 @@ import pi_section
 import t_section
 
 class MainWindow(QObject):
+    # Khoi tao zs_re, zs_im, zl_re, zl_im, f, q, typeOfImpedance, circuitType, f_unit
     def __init__(self):
         QObject.__init__(self)
         self.zs_re = 0
@@ -42,12 +43,14 @@ class MainWindow(QObject):
             return True
         return False
 
+    # Tra ve du lieu dau vao cho qml
     @Property(list)
     def setData(self):
         # zs_re, zs_im, zl_re, zl_im, f, q, typeOfImpedance, circuitType, f_unit
         data = [self.zs_re, self.zs_im, self.zl_re, self.zl_im, self.f, self.q, self.typeOfImpedance, self.circuitType, self.f_unit]
         return data
 
+    # Lay du lieu tu dau vao
     @Slot(str, str, str, str, str, str, str)
     def getParameter(self, zs_re, zs_im, zl_re, zl_im, f, q, f_unit):
         self.zs_re = zs_re
@@ -58,11 +61,12 @@ class MainWindow(QObject):
         self.q = q
         self.f_unit = f_unit
 
-
+    # Lay dang mach
     @Slot(str)
     def getCircuitType(self, name):
         self.circuitType = name
 
+    # Lay dang dc feed hay dc block
     @Slot(str)
     def getTypeOfImpedance(self, name):
         self.typeOfImpedance = name
@@ -76,6 +80,7 @@ class MainWindow(QObject):
     #         return l_section.dc_block_handler(self.setData)
 
 
+    # Nhan tin hieu calculate va gui result thong qua signal
     result = Signal(list)
     @Slot()
     def calculate(self):

@@ -3,6 +3,7 @@
 # if __name__ == "__main__":
 #     pass
 
+# Them so 1,2 vao duoi c,l
 def add_1_2_in_pi_l_section(name):
     print(name)
     if name[0] == name[1]:
@@ -12,6 +13,7 @@ def add_1_2_in_pi_l_section(name):
     else:
         return [name[0],name[1]+"1",name[2]+"2"]
 
+# Chuyen GHz, MHz, Khz -> Hz
 def convert_f_unit(f, unit):
     match unit:
         case "Hz":
@@ -23,6 +25,7 @@ def convert_f_unit(f, unit):
         case "GHz":
             return f * 1e9
 
+# Chuyen du lieu sang dang hien thi (mach l)
 def l_section_convert_to_ui(data):
     if not data:
         return []
@@ -33,6 +36,7 @@ def l_section_convert_to_ui(data):
             data[i][2] = "🔹 C Value: " + str(round(data[i][2],4)) + " pF"
         return data
 
+# Chuyen du lieu sang dang hien thi (mach t, pi)
 def pi_l_section_convert_to_ui(data):
     if not data:
         return []
