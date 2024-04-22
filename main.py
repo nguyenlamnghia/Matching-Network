@@ -5,7 +5,8 @@ from pathlib import Path
 from PySide2.QtGui import QGuiApplication
 from PySide2.QtQml import QQmlApplicationEngine
 from PySide2.QtCore import QObject, Slot, Signal, Property
-
+from sys import path
+path.append('module')
 import l_section
 import pi_section
 import t_section
@@ -71,15 +72,6 @@ class MainWindow(QObject):
     def getTypeOfImpedance(self, name):
         self.typeOfImpedance = name
 
-    # @Property("QVariantList")
-    # def calculate(self):
-    #     if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Feed") :
-    #         return l_section.dc_feed_handler(self.setData)
-    #     if (self.typeOfImpedance == "L Section" and self.circuitType == "DC Block") :
-    #         print(l_section.dc_block_handler(self.setData))
-    #         return l_section.dc_block_handler(self.setData)
-
-
     # Nhan tin hieu calculate va gui result thong qua signal
     result = Signal(list)
     @Slot()
@@ -116,7 +108,7 @@ if __name__ == "__main__":
     engine.rootContext().setContextProperty("backend", main)
 
     # load qml file
-    qml_file = Path(__file__).resolve().parent / "main.qml"
+    qml_file = Path(__file__).resolve().parent / "qml/main.qml"
     engine.load(str(qml_file))
     if not engine.rootObjects():
         sys.exit(-1)
